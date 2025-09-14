@@ -1,1 +1,3 @@
 # Use psql and run predict or something
+
+    docker build -t soil-image .
