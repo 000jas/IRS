@@ -1,12 +1,13 @@
-FROM python:3.11
+FROM python:3.11-slim
 
+# Install system build tools and libraries needed by pandas and scikit-learn
 RUN apt-get update && apt-get install -y --no-install-recommends \
     build-essential \
     gcc \
     g++ \
-    libatlas-base-dev \
-    libopenblas-dev \
+    libblas-dev \
     liblapack-dev \
+    libopenblas-dev \
     python3-dev \
     libpq-dev \
     curl \
