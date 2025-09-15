@@ -1,3 +1,5 @@
-# Use psql and run predict or something
-
-    docker build -t soil-image .
+vinay->
+python -m venv myenv 
+myenv\Scripts\activate
+pip install -r requirements.txt
+python app.py
