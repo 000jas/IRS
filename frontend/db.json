@@ -1,0 +1,17 @@
+{
+  "data": [
+    {
+      "id": 1,
+      "soil_moisture": 42,
+      "soil_temp": 23.5,
+      "soil_ph": 6.8,
+      "tank_level": 78,
+      "ambient_humidity": 56,
+      "ambient_temp": 27.3,
+      "timestamp": "2025-09-14T10:30:00Z",
+      "irrigate": false,
+      "water_litres": 0,
+      "rain_next_48h": true
+    }
+  ]
+}
