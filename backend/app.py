@@ -32,7 +32,7 @@ def parse_timestamp(ts):
 
 # Weather API setup
 WEATHER_API_KEY = "9a2e84ed355d6bed7c639dba9d1e8af3"
-LAT, LON = 21.1458, 79.0882
+LAT, LON = 26.4499, 74.6399
 
 # Logging path
 LOG_PATH = "irrigation_log.csv"
