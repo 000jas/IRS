@@ -171,6 +171,42 @@ def predict():
     inp = request.json or {}
     return jsonify(run_prediction(inp))
 
+@app.route("/showData", methods=["GET"])
+def show_data():
+    try:
+        conn = get_db_connection()
+        cur = conn.cursor()
+
+        # Fetch last inserted row
+        query = """
+            SELECT 
+                id, user_id, soil_moisture, soil_temp, soil_ph, tank_level,
+                ambient_humidity, ambient_temp, timestamp,
+                irrigate, water_litres, rain_next_48h
+            FROM soil_data
+            ORDER BY id DESC
+            LIMIT 1
+        """
+        cur.execute(query)
+        row = cur.fetchone()
+
+        cur.close()
+        conn.close()
+
+        if row:
+            # Convert row into dict for JSON
+            keys = [
+                "id", "user_id", "soil_moisture", "soil_temp", "soil_ph", "tank_level",
+                "ambient_humidity", "ambient_temp", "timestamp",
+                "irrigate", "water_litres", "rain_next_48h"
+            ]
+            return jsonify(dict(zip(keys, row)))
+        else:
+            return jsonify({"message": "No data found"}), 404
+
+    except Exception as e:
+        print("DB Fetch Error:", e)
+        return jsonify({"error": "Database error"}), 500
 
 @app.route("/sensor-data", methods=["POST"])
 def sensor_data():
