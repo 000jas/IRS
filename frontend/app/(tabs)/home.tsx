@@ -27,7 +27,7 @@ export default function Dashboard() {
 
   const fetchData = async () => {
     try {
-      const response = await fetch("http://127.0.0.1:5000/showData");  // apne app ka endpoint dal
+      const response = await fetch("http://192.168.1.7:5000/showData");  // apne app ka endpoint dal
       if (!response.ok) {
         throw new Error("Failed to fetch data from backend.");
       }
@@ -81,8 +81,8 @@ export default function Dashboard() {
             <Text style={styles.errorText}>{errorMsg}</Text>
           ) : (
             <View style={styles.cardContent}>
-              <Text style={[styles.primaryValue, { color: getSoilMoistureColor(data?.soil_moisture || 0) }]}>
-                {data?.soil_moisture.toFixed(0)}%
+              <Text style={[styles.primaryValue, { color: getSoilMoistureColor((data?.soil_moisture ?? 0)) }]}>
+                {(data?.soil_moisture ?? 0).toFixed(0)}%
               </Text>
               <View style={styles.progressBar}>
                 <View 
@@ -116,8 +116,8 @@ export default function Dashboard() {
             <Text style={styles.errorText}>{errorMsg}</Text>
           ) : (
             <View style={styles.cardContent}>
-              <Text style={[styles.primaryValue, { color: getTemperatureColor(data?.ambient_temp || 0) }]}>
-                {data?.ambient_temp.toFixed(1)}°C
+              <Text style={[styles.primaryValue, { color: getTemperatureColor((data?.ambient_temp ?? 0)) }]}>
+                {(data?.ambient_temp ?? 0).toFixed(1)}°C
               </Text>
               <View style={styles.humidityRow}>
                 <Text style={styles.humidityLabel}>💨 Humidity</Text>
@@ -142,7 +142,7 @@ export default function Dashboard() {
             <Text style={styles.errorTextSmall}>{errorMsg}</Text>
           ) : (
             <>
-              <Text style={styles.secondaryValue}>{data?.tank_level.toFixed(0)}%</Text>
+              <Text style={styles.secondaryValue}>{(data?.tank_level ?? 0).toFixed(0)}%</Text>
               <View style={styles.tankIndicator}>
                 <View 
                   style={[

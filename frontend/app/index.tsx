@@ -6,36 +6,23 @@ import {
   TouchableOpacity,
   StyleSheet,
   SafeAreaView,
-  Image,
-  Alert,
 } from 'react-native';
-import { useRouter } from 'expo-router';
+import { useRouter, Link } from 'expo-router';
 
-export default function LoginScreen() {
+export default function HomeScreen() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const router = useRouter();
 
   const handleLogin = () => {
-    // In a real app, you would have robust validation and an API call here.
-    if (email && password) {
-      // Navigate to the main app dashboard
-      router.replace('/(tabs)/home');
-    } else {
-      Alert.alert('Login Failed', 'Please enter both email and password.');
-    }
+    // Bypass login and navigate directly to the home screen
+    router.replace('/(tabs)/home');
   };
 
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.content}>
-        {/* Thematic Image
-        <Image
-          source={require('../assets/images/farm-icon.png')} // Make sure you have an image here
-          style={styles.logo}
-        /> */}
-
-        {/* Title */}
+        {/* Title and Subtitle */}
         <Text style={styles.title}>Agro Smart</Text>
         <Text style={styles.subtitle}>Smart Irrigation for Hilly Regions</Text>
 
@@ -63,10 +50,17 @@ export default function LoginScreen() {
           <Text style={styles.buttonText}>Login</Text>
         </TouchableOpacity>
 
-        {/* Forgot Password Link */}
+        {/* Forgot Password and Register links */}
         <TouchableOpacity>
-          <Text style={styles.forgotPasswordText}>Forgot Password?</Text>
+          <Text style={styles.linkText}>Forgot Password?</Text>
         </TouchableOpacity>
+
+        {/* Register Button */}
+        <Link href="/register" asChild>
+          <TouchableOpacity style={styles.registerButton}>
+            <Text style={styles.registerButtonText}>Register</Text>
+          </TouchableOpacity>
+        </Link>
       </View>
     </SafeAreaView>
   );
@@ -81,12 +75,6 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     padding: 24,
-  },
-  logo: {
-    width: 100,
-    height: 100,
-    alignSelf: 'center',
-    marginBottom: 20,
   },
   title: {
     fontSize: 32,
@@ -116,17 +104,29 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     alignItems: 'center',
     marginTop: 10,
+    marginBottom: 10,
   },
   buttonText: {
     color: '#fff',
     fontSize: 18,
     fontWeight: 'bold',
   },
-  forgotPasswordText: {
+  linkText: {
     color: '#0a7ea4',
     textAlign: 'center',
-    marginTop: 20,
+    marginTop: 10,
     fontSize: 16,
   },
+  registerButton: {
+    backgroundColor: '#2196F3', // A friendly blue for secondary action
+    paddingVertical: 15,
+    borderRadius: 8,
+    alignItems: 'center',
+    marginTop: 20,
+  },
+  registerButtonText: {
+    color: '#fff',
+    fontSize: 18,
+    fontWeight: 'bold',
+  },
 });
-
